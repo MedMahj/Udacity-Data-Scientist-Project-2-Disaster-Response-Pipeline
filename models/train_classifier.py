@@ -93,10 +93,12 @@ def main():
         print('Building model...')
         model = build_model()
 
+        print(datetime.datetime.now())
         start = time.time()
         print('Training model...')
         model.fit(X_train, Y_train)
         end = time.time()
+        print(datetime.datetime.now())
         print('Model Trained in ', str(datetime.timedelta(seconds=(end-start))))
         
         print('Evaluating model...')
