@@ -1,7 +1,7 @@
 flask ==1.1.2 
 jupyter==1.0.0
 nltk
-notebook==6.3.0
+notebook
 numpy==1.19.2
 pandas==1.2.3 
 plotly==4.14.3
