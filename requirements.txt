@@ -1,7 +1,5 @@
 flask
-jupyter
 nltk
-notebook
 numpy
 pandas
 plotly
