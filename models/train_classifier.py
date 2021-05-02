@@ -74,7 +74,15 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+
+    Y_pred = model.predict(X_test)
+
+    report = {}
+    for i in range(len(category_names)):
+        report[category_names[i]] = classification_report(Y_test[:,i], Y_pred[:,i], output_dict=False, zero_division='warn')
+        print('{} :\n {}\n'.format(category_names[i].upper(),report[category_names[i]]))
+    
+    return report
 
 
 def save_model(model, model_filepath):
