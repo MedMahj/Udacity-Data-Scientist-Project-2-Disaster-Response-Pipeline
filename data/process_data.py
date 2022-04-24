@@ -5,7 +5,15 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
-
+    """
+      Function:
+      load data from two csv files and merge them
+      Args:
+      messages_filepath (str): the file path of messages csv file
+      categories_filepath (str): the file path of categories csv file
+      Return:
+      df (DataFrame): A dataframe of messages and categories
+      """
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     # load categories dataset
@@ -17,14 +25,20 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
-    pass
+    """
+      Function:
+      clean the Dataframe df
+      Args:
+      df (DataFrame): A dataframe of messages and categories need to be cleaned
+      Return:
+      df (DataFrame): A cleaned dataframe of messages and categories
+      """
     # create a dataframe of the 36 individual category columns
     categories = df.categories.str.split(";",expand=True)
     # select the first row of the categories dataframe
     row = categories.iloc[0]
 
-    # use this row to extract a list of new column names for categories.
-    # one way is to apply a lambda function that takes everything 
+    # extract a list of new column names for categories 
     # up to the second to last character of each string with slicing
     category_colnames = [col[:-2]  for col in list(row)]
     # rename the columns of `categories`
@@ -50,11 +64,14 @@ def clean_data(df):
     return df
 
 
-
-
-
 def save_data(df, database_filename):
-    pass 
+    """
+       Function:
+       Save the Dataframe df in a database
+       Args:
+       df (DataFrame): A dataframe of messages and categories
+       database_filename (str): The file name of the database
+       """
     engine = create_engine('sqlite:///'+database_filename)
     df.to_sql('Messages', engine, index=False) 
 
